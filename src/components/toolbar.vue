@@ -124,7 +124,7 @@
         this.showPopup(name, event.currentTarget)
       },
       showPopup (name, obj) {
-        this.$store.dispatch('updatePopupDisplay', this.states[name].showPopup !== undefined ? {name, display: !this.states[name].showPopup} :  {} )
+        this.$store.dispatch('updatePopupDisplay', this.states[name].showPopup !== undefined ? {name, display: !this.states[name].showPopup} : {})
         this.$store.dispatch('updateRect', {
           left: obj.offsetLeft,
           top: obj.offsetTop,

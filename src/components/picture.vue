@@ -11,7 +11,7 @@
 </style>
 
 <template>
-  <div class="ve-dialog" v-show="showPopup" @click.self="hideDialog">
+  <div class="ve-dialog" v-show="showPopup" @scroll.prevent.stop >
     <div :class="$style.wrap">
       <div class="ve-dialog-header">{{lang.title}}<a href="javascript:;" class="ve-close" @click="hideDialog">&times;</a></div>
       <div class="ve-dialog-body">
@@ -50,6 +50,7 @@
     watch: {
       'showPopup': function (val) {
         if (val) {
+          document.body.appendChild(this.$el)
           document.body.classList.add('ve-fixed')
         } else {
           document.body.classList.remove('ve-fixed')
@@ -59,6 +60,8 @@
     methods: {
       hideDialog () {
         this.$store.dispatch('updatePopupDisplay')
+        this.url = ''
+        this.$refs.file.value = ''
       },
       changeHandler () {
         let obj = this.$refs.file
