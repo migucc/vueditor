@@ -1,13 +1,6 @@
 
 <style module>
-  .wrap {
-    width: 500px;
-    position: relative;
-    top: 50%;
-    background: #fff;
-    margin: 0 auto;
-    transform: translateY(-60%);
-  }
+  
 </style>
 
 <template>

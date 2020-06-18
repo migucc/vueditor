@@ -55,7 +55,7 @@ function mixinConfig (opts) {
   let config = opts ? Object.assign({}, defaultConf, opts) : defaultConf
   let lang = config.lang || getDefaultLang()
   let list = [
-    'fontName', 'fontSize', 'element', 'foreColor', 'backColor', 'undo', 'table', 'link',
+    'fontName', 'fontSize', 'foreColor', 'backColor', 'undo', 'table', 'link',
     'code', 'picture', 'sourceCode', 'markdown', 'fullscreen'
   ]
   // type check for config

@@ -23,7 +23,6 @@
   import undo from './undo.vue'
   import link from './link.vue'
   import picture from './picture.vue'
-  import markdown from './markdown.vue'
   import fullscreen from './fullscreen.vue'
 
   import '../style/style.less'
@@ -43,7 +42,6 @@
       've-link': link,
       've-undo': undo,
       've-picture': picture,
-      've-markdown': markdown,
       've-fullscreen': fullscreen
     },
     computed: {

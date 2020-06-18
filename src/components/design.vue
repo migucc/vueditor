@@ -19,6 +19,7 @@
         timer: null,
         inited: false,
         cache: '',
+        firstCursor: true,
         lang: getLang('design')
       }
     },
@@ -38,11 +39,13 @@
         }
       },
       'content': function (val) {
+        let imgReg = /<img src="data:image.*?(?:>|\/>)/g
+        let str = val.replace(imgReg, '')
         if (this.inited) {
-          this.iframeBody.innerHTML !== val && (this.iframeBody.innerHTML = val)
+          this.iframeBody.innerHTML !== str && (this.iframeBody.innerHTML = str)
           this.view === 'design' && this.updateStates()
         } else {
-          this.cache = val
+          this.cache = str
         }
       },
       'command': function (data) {
@@ -89,6 +92,7 @@
         let timer = null
         this.iframeDoc.addEventListener('click', () => {
           // throttle
+          this.firstCursor = false
           clearTimeout(timer)
           timer = setTimeout(() => {
             this.view === 'design' && this.updatePopupDisplay()
@@ -159,6 +163,10 @@
       },
 
       insertHTML (name, value) {
+        if(value.length >= 12 && value[1] === 'i' && value[2] === 'm' && value[3] === 'g' && this.firstCursor) {
+          this.iframeBody.innerHTML += value
+          return
+        }
         let sel = this.getSelection()
         let range = this.getRange()
         if (!sel || !range) return

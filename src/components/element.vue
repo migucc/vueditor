@@ -2,10 +2,6 @@
 <style module lang="less" rel="stylesheet/less">
   .ctn {
     li {
-      display: block;
-      cursor: pointer;
-      padding: 6px;
-      border-bottom: 1px solid #ddd;
       &:last-child {
         border-bottom: none;
       }
