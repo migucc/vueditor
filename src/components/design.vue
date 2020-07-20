@@ -46,7 +46,7 @@
         let imgReg = /<v:imagedata src=".*?(?:>|\/>)/g
         let str = val.replace(imgReg, '')
         if (this.inited) {
-          this.iframeBody.innerHTML !== str && (this.updateContent(str))
+          this.iframeBody.innerHTML !== str && (this.iframeBody.innerHTML !== str)
           this.view === 'design' && this.updateStates()
         } else {
           this.cache = str
