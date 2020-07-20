@@ -16,9 +16,7 @@
   import color from './color.vue'
   import fontName from './fontname.vue'
   import fontSize from './fontsize.vue'
-  import sourceCode from './sourcecode.vue'
   import code from './code.vue'
-  import element from './element.vue'
   import table from './table.vue'
   import undo from './undo.vue'
   import link from './link.vue'
@@ -31,13 +29,11 @@
     components: {
       've-toolbar': toolbar,
       've-design': design,
-      've-sourcecode': sourceCode,
       've-code': code,
       've-forecolor': color,
       've-backcolor': color,
       've-fontname': fontName,
       've-fontsize': fontSize,
-      've-element': element,
       've-table': table,
       've-link': link,
       've-undo': undo,

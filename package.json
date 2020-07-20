@@ -1,6 +1,6 @@
 {
   "name": "vueditor_test",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "a wysiwyg editor based on Vue.js and Vuex",
   "repository": {
     "type": "git",
@@ -52,11 +52,7 @@
     "webpack-hot-middleware": "^2.18.2"
   },
   "keywords": [
-    "vue editor",
-    "vue.js editor",
-    "rich text editor",
-    "wysiwyg editor",
-    "vue.js wysiwyg editor"
+    "vue editor"
   ],
   "author": "hifarer",
   "license": "MIT"

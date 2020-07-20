@@ -20,7 +20,8 @@
         inited: false,
         cache: '',
         firstCursor: true,
-        lang: getLang('design')
+        lang: getLang('design'),
+        imgtimer: null
       }
     },
 
@@ -31,6 +32,9 @@
       states: 'toolbar'
     }),
 
+    beforeDestroy() {
+      clearTimeout(this.imgtimer)
+    },
     watch: {
       'view': function (val) {
         if (val !== 'design') {
@@ -39,14 +43,15 @@
         }
       },
       'content': function (val) {
-        let imgReg = /<img src="data:image.*?(?:>|\/>)/g
+        let imgReg = /<v:imagedata src=".*?(?:>|\/>)/g
         let str = val.replace(imgReg, '')
         if (this.inited) {
-          this.iframeBody.innerHTML !== str && (this.iframeBody.innerHTML = str)
+          this.iframeBody.innerHTML !== str && (this.updateContent(str))
           this.view === 'design' && this.updateStates()
         } else {
           this.cache = str
         }
+        this.uploadImg()
       },
       'command': function (data) {
         this.exec(data.name, data.value)
@@ -59,6 +64,39 @@
       'updatePopupDisplay',
       'callMethod'
     ]), {
+      uploadImg() {
+        clearTimeout(this.imgtimer)
+        let complete = true, i
+        let imgs = this.iframeDoc.getElementsByTagName('img')
+        for(i = 0; i < imgs.length; i++) {
+          if(imgs[i].src.slice(0, 10) === 'data:image') {
+            if (this.$parent.upload) {
+              let obj = { files: [] }
+              let index = i
+              obj.files.push(this.dataURLtoFile(imgs[index].src))
+              this.$parent.upload(obj, function (href) {
+                imgs[index].src = href
+                this.updateContent(this.iframeBody.innerHTML)
+              }.bind(this))
+            }
+            complete = false
+          }
+        }
+        if(!complete) {
+          this.imgtimer = setTimeout(() => {
+            this. uploadImg()
+          }, 1000)
+        }
+      },
+      dataURLtoFile(dataurl) {
+        let filename = (new Date()).toString() + '.png'
+        let arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+        while(n--) {
+          u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new File([u8arr], filename, {type:mime});
+      },
       init (event) {
         this.iframeWin = event.target.contentWindow
         this.iframeDoc = this.iframeWin.document
