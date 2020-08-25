@@ -46,7 +46,7 @@
         let imgReg = /<v:imagedata src=".*?(?:>|\/>)/g
         let str = val.replace(imgReg, '')
         if (this.inited) {
-          this.iframeBody.innerHTML !== str && (this.iframeBody.innerHTML !== str)
+          this.iframeBody.innerHTML !== str && (this.iframeBody.innerHTML = str)
           this.view === 'design' && this.updateStates()
         } else {
           this.cache = str
@@ -66,7 +66,7 @@
     ]), {
       uploadImg() {
         clearTimeout(this.imgtimer)
-        let complete = true, i
+        let i
         let imgs = this.iframeDoc.getElementsByTagName('img')
         for(i = 0; i < imgs.length; i++) {
           if(imgs[i].src.slice(0, 10) === 'data:image') {
@@ -79,13 +79,7 @@
                 this.updateContent(this.iframeBody.innerHTML)
               }.bind(this))
             }
-            complete = false
           }
-        }
-        if(!complete) {
-          this.imgtimer = setTimeout(() => {
-            this. uploadImg()
-          }, 1000)
         }
       },
       dataURLtoFile(dataurl) {
@@ -109,7 +103,7 @@
         this.iframeDoc.designMode = 'on'
         this.iframeBody.spellcheck = getConfig('spellcheck')
         this.iframeBody.style.cssText = 'overflow-x: hidden;'
-        this.iframeDoc.head.insertAdjacentHTML('beforeEnd', '<style>pre {margin: 0; padding: 0.5rem; background: #f5f2f0;}</style>')
+        this.iframeDoc.head.insertAdjacentHTML('beforeEnd', '<style>pre {margin: 0; padding: 0.5rem; background: #f5f2f0;} img {max-width: 100%;}</style>')
         this.addEvent()
       },
 
@@ -140,6 +134,11 @@
         }, false)
         this.iframeBody.addEventListener('keydown', this.keydownHandler, false)
         this.iframeBody.addEventListener('keyup', this.keyupHandler, false)
+        this.iframeBody.addEventListener("paste", () => {
+          setTimeout(() => {
+            this.uploadImg()
+          }, 150)
+        }, false)
         this.selectionChange()
       },
 
