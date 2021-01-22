@@ -134,11 +134,7 @@
         }, false)
         this.iframeBody.addEventListener('keydown', this.keydownHandler, false)
         this.iframeBody.addEventListener('keyup', this.keyupHandler, false)
-        this.iframeBody.addEventListener("paste", () => {
-          setTimeout(() => {
-            this.uploadImg()
-          }, 150)
-        }, false)
+        this.iframeBody.addEventListener("paste", this.keyupHandler, false)
         this.selectionChange()
       },
 

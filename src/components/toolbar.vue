@@ -54,7 +54,7 @@
       <div v-if="item in btns" 
         @click.stop.prevent="btnHandler($event, item)" 
         :title="lang[item].title"
-        :class="{'ve-active': states[item].status == 'actived', 've-disabled': states[item].status == 'disabled'}" 
+        :class="{'ve-active': item != 'picture' && states[item].status == 'actived', 've-disabled': states[item].status == 'disabled'}" 
         unselectable="on">
         <i :class="[btns[item].className]"></i>
       </div>
