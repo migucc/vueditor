@@ -30,19 +30,11 @@
       },
       changeHandler () {
         let obj = this.$refs.file
-        this.url = ''
-        if (obj.files.length !== 0 && obj.files.item(0).type.indexOf('image') !== -1) {
-          this.url = window.URL.createObjectURL(obj.files.item(0))
-        }
-        if (this.url) {
-          if (this.$parent.upload) {
-            this.$parent.upload(obj, function (href) {
-              this.$store.dispatch('execCommand', {name: 'insertHTML', value: `<img src="${href}">`})
-              this.hideDialog()
-            }.bind(this))
-          }
-        } else {
-          window.alert(this.lang.invalidFile)
+        if (this.$parent.upload) {
+          this.$parent.upload(obj, function (href) {
+            this.$store.dispatch('execCommand', {name: 'insertHTML', value: `<img src="${href}">`})
+            this.hideDialog()
+          }.bind(this))
         }
       },
     }
