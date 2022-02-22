@@ -9,7 +9,7 @@ A wysiwyg editor written in Vue.js and Vuex.js, require Vue.js 2.0.0, Vuex.js 2.
 
 Browser compatibility: Chrome, Firefox, Safari, IE 9+.
 
-**forked from [xiaofengting/vueditor](https://github.com/xiaofengting/vueditor) from [hifarer/vueditor](https://github.com/hifarer/vueditor)**
+**forked from [xiaofengting/vueditor](https://github.com/xiaofengting/vueditor) that from [hifarer/vueditor](https://github.com/hifarer/vueditor)**
 
 Online [DEMO](http://hifarer.github.io/vueditor/)
 
@@ -36,9 +36,9 @@ Use it in the following cases:
 ```javascript
 import Vue from 'vue'
 import Vuex from 'vuex'
-import Vueditor from 'vueditor'
+import Vueditor from 'vueditor_plus'
 
-import 'vueditor/dist/style/vueditor.min.css'
+import 'vueditor_plus/dist/style/vueditor.min.css'
 
 // your config here
 let config = {
@@ -91,9 +91,9 @@ Call `createEditor` and pass specific config as parameter respectively for multi
 
   import Vue from 'vue'
   import Vuex from 'vuex'
-  import { createEditor } from 'vueditor'
+  import { createEditor } from 'vueditor_plus'
 
-  import 'vueditor/dist/style/vueditor.min.css'
+  import 'vueditor_plus/dist/style/vueditor.min.css'
   
   Vue.use(Vuex);
 
@@ -145,12 +145,11 @@ editor.upload = function (obj, callback) {
 ### language setting
 
 The editor's default language is English, to set to other language, you will need to translate for your own.
-The `dist/language` folder has an full example inside. Adding a script tag or use `import`, `require` to    
-bring the language object in, then make it an attribute of the config for initialize. See the example below:
+vueditor provides a common cn configuration `cn`. you can also bring the language object in, then make it an attribute of the config for initialize. See the example below:
 ```javascript
 Vue.use(Vueditor, {
   ...
-  lang: languageObject,
+  lang: languageObject, // lang: 'cn'
 });
 ```
 
