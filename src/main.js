@@ -5,6 +5,7 @@ import Vuex from 'vuex'
 import { setLang, getDefaultLang } from './config/lang.js'
 import { resetToolbar, modifyToolbar } from './config/toolbar.js'
 import { setConfig, getDefaultConf } from './config/index.js'
+import cnLang from './config/lang.cn.js'
 
 import app from './components/app.vue'
 import createStore from './store/states.js'
@@ -53,19 +54,15 @@ function checkConfig (config) {
 function mixinConfig (opts) {
   let defaultConf = getDefaultConf()
   let config = opts ? Object.assign({}, defaultConf, opts) : defaultConf
-  let lang = config.lang || getDefaultLang()
+  let lang = !config.lang || config.lang === 'en' ? getDefaultLang() : config.lang
+  if (config.lang === 'cn') {
+    lang = cnLang
+  }
+  config.lang = lang
   let list = [
     'fontName', 'fontSize', 'foreColor', 'backColor', 'undo', 'table', 'link',
     'code', 'picture', 'sourceCode', 'markdown', 'fullscreen'
   ]
-  // type check for config
-  let typeInfo = checkConfig(config)
-  if (!typeInfo.valid) {
-    throw new Error(typeInfo.info)
-  }
-
-  resetToolbar()
-
   config.plugins && config.plugins.forEach(({ name, element, component }) => {
     list.push(name)
     app.components['ve-' + name] = component
@@ -76,6 +73,14 @@ function mixinConfig (opts) {
 
   setConfig(config)
   setLang(lang)
+
+  // type check for config
+  let typeInfo = checkConfig(config)
+  if (!typeInfo.valid) {
+    throw new Error(typeInfo.info)
+  }
+
+  resetToolbar()
 
   return Object.assign({}, app, {
     store: new Vuex.Store(createStore()),

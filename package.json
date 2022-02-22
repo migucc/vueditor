@@ -1,10 +1,10 @@
 {
-  "name": "vueditor_test",
-  "version": "0.5.4",
+  "name": "vueditor_plus",
+  "version": "0.1.0",
   "description": "a wysiwyg editor based on Vue.js and Vuex",
   "repository": {
     "type": "git",
-    "url": "https://github.com/xiaofengting/vueditor.git"
+    "url": "https://github.com/migucc/vueditor.git"
   },
   "main": "dist/script/vueditor.min.js",
   "scripts": {

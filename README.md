@@ -1,15 +1,15 @@
 Vueditor
 ===
 
-[![vueditor](https://img.shields.io/npm/v/vueditor.svg)](https://www.npmjs.com/package/vueditor)
-[![vueditor](https://img.shields.io/npm/l/vueditor.svg)](https://www.npmjs.com/package/vueditor)
+[![vueditor](https://img.shields.io/npm/v/vueditor_plus.svg)](https://www.npmjs.com/package/vueditor_plus)
+[![vueditor](https://img.shields.io/npm/l/vueditor_plus.svg)](https://www.npmjs.com/package/vueditor_plus)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-
-[中文文档](./docs/chinese.md)
 
 A wysiwyg editor written in Vue.js and Vuex.js, require Vue.js 2.0.0, Vuex.js 2.0.0 and above.
 
 Browser compatibility: Chrome, Firefox, Safari, IE 9+.
+
+**forked from [xiaofengting/vueditor](https://github.com/xiaofengting/vueditor) from [hifarer/vueditor](https://github.com/hifarer/vueditor)**
 
 Online [DEMO](http://hifarer.github.io/vueditor/)
 
@@ -17,15 +17,9 @@ Online [DEMO](http://hifarer.github.io/vueditor/)
 
 ![vueditor](./vueditor.gif)
 
-## Features
-
-- Customizable
-- Light weighted, very few dependencies
-- Plugin support
-
 ## Installation
 ```javascript
-npm install vueditor
+npm install vueditor_plus
 ```
 
 If you prefer to use it via script tag, download the last release package and add `vueditor.min.js`, `vueditor.min.css` to your page. 
@@ -104,12 +98,20 @@ Call `createEditor` and pass specific config as parameter respectively for multi
   Vue.use(Vuex);
 
   createEditor('#editorContainer', {
+    lang: 'cn', // default is en. also support whole lang config（object）
     toolbar: [
       'removeFormat', 'undo', '|', 'elements', 'fontName', 'fontSize', 'foreColor', 'backColor', 
     ],
     uploadUrl: '',
     id: '',
-    classList: []
+    classList: [],
+    // DOMString
+    injectStyle: `
+        body {
+          background: red;
+          color: #fff;
+        }
+      `
   });
 ```
 
@@ -190,10 +192,6 @@ Default value of the above fields:
   classList: []
 };
 ```
-
-## Change log
-
-See [change log](./docs/changelog.md)
 
 ## Bug confirmed
 

@@ -12,7 +12,7 @@
 <script>
   import toolbar from './toolbar.vue'
   import design from './design.vue'
-  
+
   import color from './color.vue'
   import fontName from './fontname.vue'
   import fontSize from './fontsize.vue'
