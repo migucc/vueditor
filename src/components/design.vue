@@ -103,7 +103,10 @@
         this.iframeDoc.designMode = 'on'
         this.iframeBody.spellcheck = getConfig('spellcheck')
         this.iframeBody.style.cssText = 'overflow-x: hidden; height: fit-content;'
-        this.iframeDoc.head.insertAdjacentHTML('beforeEnd', '<style>pre {margin: 0; padding: 0.5rem; background: #f5f2f0;} img {max-width: 100%;}</style>')
+        // 合并样式
+        const defaultStyle = getConfig('defaultStyle') || ''
+        const injectStyle = getConfig('injectStyle') || ''
+        this.iframeDoc.head.insertAdjacentHTML('beforeEnd', `<style>${defaultStyle + injectStyle}</style>`)
         this.addEvent()
       },
 

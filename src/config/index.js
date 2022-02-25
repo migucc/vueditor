@@ -18,7 +18,17 @@ let defaultConf = {
       attr: 'class',
       value: 'language-#type#'
     }
-  }
+  },
+  defaultStyle: `
+    pre {
+      margin: 0;
+      padding: 0.5rem;
+      background: #f5f2f0;
+    }
+    img {
+      max-width: 100%;
+    }
+  `
 }
 
 let config = JSON.parse(JSON.stringify(defaultConf))

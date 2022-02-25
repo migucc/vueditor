@@ -1,6 +1,7 @@
 
 import Vue from 'vue'
 import Vuex from 'vuex'
+import cnLang from './config/lang.cn.js'
 
 import { setLang, getDefaultLang } from './config/lang.js'
 import { resetToolbar, modifyToolbar } from './config/toolbar.js'
@@ -53,7 +54,13 @@ function checkConfig (config) {
 function mixinConfig (opts) {
   let defaultConf = getDefaultConf()
   let config = opts ? Object.assign({}, defaultConf, opts) : defaultConf
-  let lang = config.lang || getDefaultLang()
+  // 处理lang配置
+  if (!config.lang || config.lang === 'en') {
+    config.lang = getDefaultLang()
+  } else if (config.lang === 'cn') {
+    config.lang = cnLang
+  }
+  let lang = config.lang
   let list = [
     'fontName', 'fontSize', 'foreColor', 'backColor', 'undo', 'table', 'link',
     'code', 'picture', 'sourceCode', 'markdown', 'fullscreen'
